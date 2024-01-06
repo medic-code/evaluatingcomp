@@ -1,0 +1,21 @@
+{
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.1",
+    "cheerio": "^1.0.0-rc.12",
+    "dotenv": "^16.3.1",
+    "html-to-text": "^9.0.5",
+    "langchain": "^0.0.212",
+    "openai": "^4.24.1"
+  },
+  "name": "evaluatingcomp",
+  "description": "This project takes information from the web and using Open AI's GPT model to take use this information to create a reasoned analysis of a company using a framework that you can choose. It uses the lean canvas as a basis, but goes beyond this.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {}
+}
