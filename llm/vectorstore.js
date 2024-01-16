@@ -21,7 +21,6 @@ async function createVectorstore(documents) {
     } catch(error) {
         console.error(error)
     }
-    console.log('Documents added to vectorstore')
 }
 
 module.exports = createVectorstore;

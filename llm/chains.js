@@ -9,10 +9,10 @@ const docAsString = require('../utils/formatDocs');
 
 dotenv.config({ path: `${__dirname}/.env` });
 
-const model = new OpenAI({temperature: 0.9, openAIApiKey:'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'});
+const model = new OpenAI({temperature: 0.9, openAIApiKey:process.env.OPENAI_API_KEY});
 
 async function documentRetrivalChain() {
-    const vectorStore = await createRetriver(); // Check what vectorStore contains
+    const vectorStore = await createRetriver();
     const retriever = vectorStore.asRetriever();
     const chain = RunnableSequence.from([
         (input) => input.question,
