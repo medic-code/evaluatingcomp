@@ -26,7 +26,8 @@ async function retrivalChain(question,product) {
     const chain = RunnableSequence.from([
         {
             question: (input) => input.question,
-            context: documentRetrivalChain
+            product: (input) => input.product,
+            context: (input) => documentRetrivalChain(input)
         },
         prompt,
         model,
