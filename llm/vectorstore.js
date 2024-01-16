@@ -4,11 +4,11 @@ const { OpenAIEmbeddings } = require('langchain/embeddings/openai');
 
 async function createVectorstore(documents) {
     const sbApiKey = process.env.SUPABASE_API_KEY;
-    const sbUrl = process.env.SUPABASE_URL_LC_CHATBOT;
+    const sbUrl =  process.env.SUPABASE_URL_LC_CHATBOT;
     const openAIApiKey = process.env.OPENAI_API_KEY;
     try {
         const client = createClient(sbUrl, sbApiKey);
-        await SupabaseVectorStore.fromDocuments(
+        const vectorStore = await SupabaseVectorStore.fromDocuments(
             documents,
             new OpenAIEmbeddings({openAIApiKey}),
             {
@@ -16,10 +16,12 @@ async function createVectorstore(documents) {
                 tableName: 'documents'
             }
         )
+        return vectorStore;
+
     } catch(error) {
         console.error(error)
     }
-    
+    console.log('Documents added to vectorstore')
 }
 
 module.exports = createVectorstore;
