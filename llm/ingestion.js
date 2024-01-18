@@ -2,6 +2,16 @@ const { CheerioWebBaseLoader } = require("langchain/document_loaders/web/cheerio
 const { RecursiveCharacterTextSplitter } = require('langchain/text_splitter');
 const { HtmlToTextTransformer } = require('langchain/document_transformers/html_to_text');
 const createVectorStore = require('./vectorstore');
+const { YoutubeLoader } = require("langchain/document_loaders/web/youtube")
+
+async function loadYoutube(url) {
+    const loader = YoutubeLoader.createFromUrl(url,{
+        language: "en",
+        addVideoInfo: true
+    })
+    const docs = await loader.load()
+    return docs;
+}
 
 async function loadData(urls) {
     let allData = []
@@ -11,6 +21,8 @@ async function loadData(urls) {
         allData.push(data);
         console.log(`Load website data from url${i}`);
     }
+    const youtubeDocs = await loadYoutube('https://www.youtube.com/watch?v=ecaM2e3Rfzw');
+    allData.push(youtubeDocs);
     console.log(allData.flat());
     return allData.flat();
 }
