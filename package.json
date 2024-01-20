@@ -8,6 +8,7 @@
     "langchain": "^0.0.212",
     "openai": "^4.24.1",
     "pdf-parse": "^1.1.1",
+    "pdfjs-dist": "^4.0.379",
     "youtube-transcript": "^1.0.6",
     "youtubei.js": "^5.8.0"
   },
@@ -16,9 +17,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env node index.js",
+    "start": "cross-env node index.js --experimental-vm-modules",
     "dev": "cross-env node index.js",
-    "test": "jest --runInBand"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand --watchAll"
   },
   "keywords": [],
   "author": "",
