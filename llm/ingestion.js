@@ -3,7 +3,7 @@ const { RecursiveCharacterTextSplitter } = require('langchain/text_splitter');
 const { HtmlToTextTransformer } = require('langchain/document_transformers/html_to_text');
 const createVectorStore = require('./vectorstore');
 const { YoutubeLoader } = require("langchain/document_loaders/web/youtube")
-
+const { getPDF } = require('../utils/processPDF');
 async function loadYoutube(url) {
     const loader = YoutubeLoader.createFromUrl(url,{
         language: "en",
@@ -22,7 +22,8 @@ async function loadData(urls) {
         console.log(`Load website data from url${i}`);
     }
     const youtubeDocs = await loadYoutube('https://www.youtube.com/watch?v=ecaM2e3Rfzw');
-    allData.push(youtubeDocs);
+    const pdfDocs = await getPDF('https://arxiv.org/pdf/2301.08801.pdf')
+    allData.push(youtubeDocs,pdfDocs);
     console.log(allData.flat());
     return allData.flat();
 }
