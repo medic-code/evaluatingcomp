@@ -1,7 +1,7 @@
 const dotenv = require('dotenv');
 dotenv.config({ path: `${__dirname}/.env` });
 const {retrivalChain} = require('./llm/chains');
-const createRetriver = require('./llm/ingestion');
+const { createRetriver } = require('./llm/ingestion');
 const framework = require('./utils/framework');
 const fsp = require('fs').promises;
 const path = require("path");
