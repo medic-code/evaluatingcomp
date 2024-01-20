@@ -43,11 +43,10 @@ Unit Tests
 
 Integration tests
 1. function provides a document of url off an array and pageContent.
-
 */
+
 const axios = require('axios');
 const { PDFLoader } = require('langchain/document_loaders/fs/pdf');
-const fs = require('fs').promises;
 
 function pdfValid(url) {
     const urlPattern = new RegExp(
@@ -61,19 +60,16 @@ function pdfValid(url) {
     return !!urlPattern.test(url);
 }
 
-// Example usage:
 async function getPDF(url) {
     const response = await axios.get(url, {
         responseType: 'arraybuffer'
     });
-    
+
     const blob = new Blob([response.data],{ type: 'application/octet-stream' })
     const pdfLoader = new PDFLoader(blob);
     
     const docs = await pdfLoader.load();
     return docs;
 }
-
-getPDF('https://arxiv.org/pdf/2301.08801.pdf')
 
 module.exports = { pdfValid, getPDF };
