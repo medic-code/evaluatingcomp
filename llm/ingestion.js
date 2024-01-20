@@ -4,12 +4,26 @@ const { HtmlToTextTransformer } = require('langchain/document_transformers/html_
 const createVectorStore = require('./vectorstore');
 const { YoutubeLoader } = require("langchain/document_loaders/web/youtube")
 const { getPDF } = require('../utils/processPDF');
+const { RecursiveUrlLoader } = require('langchain/document_loaders/web/recursive_url');
+const { compile } = require('html-to-text');
+
 async function loadYoutube(url) {
     const loader = YoutubeLoader.createFromUrl(url,{
         language: "en",
         addVideoInfo: true
     })
     const docs = await loader.load()
+    return docs;
+}
+
+async function loadWebsite(url) {
+    const compiledConvert = compile({wordwrap: 130});
+
+    const loader = new RecursiveUrlLoader(url, {
+        extractor: compiledConvert
+    })
+    const docs = await loader.load();
+
     return docs;
 }
 
@@ -23,7 +37,8 @@ async function loadData(urls) {
     }
     const youtubeDocs = await loadYoutube('https://www.youtube.com/watch?v=ecaM2e3Rfzw');
     const pdfDocs = await getPDF('https://arxiv.org/pdf/2301.08801.pdf')
-    allData.push(youtubeDocs,pdfDocs);
+    const websiteDocs = await loadWebsite('https://www.curaihealth.com/about')
+    allData.push(youtubeDocs,pdfDocs, websiteDocs);
     console.log(allData.flat());
     return allData.flat();
 }
@@ -64,4 +79,4 @@ async function createRetriver() {
     }
 }
 
-module.exports = createRetriver; 
+module.exports = { createRetriver, loadWebsite }; 
