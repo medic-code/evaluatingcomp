@@ -1,11 +1,12 @@
-const { CheerioWebBaseLoader } = require("langchain/document_loaders/web/cheerio");
-const { RecursiveCharacterTextSplitter } = require('langchain/text_splitter');
-const { HtmlToTextTransformer } = require('langchain/document_transformers/html_to_text');
-const createVectorStore = require('./vectorstore');
-const { YoutubeLoader } = require("langchain/document_loaders/web/youtube")
-const { getPDF } = require('../utils/processPDF');
-const { RecursiveUrlLoader } = require('langchain/document_loaders/web/recursive_url');
-const { compile } = require('html-to-text');
+import { CheerioWebBaseLoader } from 'langchain/document_loaders/web/cheerio.js';
+import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter.js';
+import { HtmlToTextTransformer } from 'langchain/document_transformers/html_to_text.js';
+import createVectorStore from './vectorstore.js';
+import { YoutubeLoader } from 'langchain/document_loaders/web/youtube.js';
+import { getPDF } from '../utils/processPDF.js';
+import { RecursiveUrlLoader } from 'langchain/document_loaders/web/recursive_url.js';
+import { compile } from 'html-to-text';
+
 
 async function loadYoutube(url) {
     const loader = YoutubeLoader.createFromUrl(url,{
@@ -52,7 +53,7 @@ async function chunkData(data) {
     return newDocuments;
 }
 
-async function createRetriver() {
+async function createRetriever() {
     try {
         const data = await loadData(['https://research.contrary.com/reports/lattice','https://research.contrary.com/reports/solv']);
         if (!data) {
@@ -79,4 +80,4 @@ async function createRetriver() {
     }
 }
 
-module.exports = { createRetriver, loadWebsite }; 
+module.exports = { createRetriever, loadWebsite }; 

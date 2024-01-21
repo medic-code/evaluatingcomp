@@ -1,11 +1,10 @@
-module.exports = {
+export default {
     testEnvironment: 'node',
-    clearMocks:true,
+    clearMocks: true,
     coverageProvider: 'v8',
     testMatch: [
         '**/tests/**/*.js',
         '**/?(*.)+(test).js'
     ],
     testPathIgnorePatterns: ['node_modules']
-
-}
+};

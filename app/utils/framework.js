@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     summary: 'What does {product}? Give a description of what it does and why it exists',
     target_users: "Who is {product} intended for? These groups of people are called target users. Target users are people who have either already adopted {product}, or who {product} is intended for. If this information wasn't provided, list some plausible target users of {product}.",
     problems: "What are the reasons for target users to seek out, and adopt, {product}? These reasons are usually problems or pain points the target users are experiencing. Reasons can also be the needs and desires of target users. If this information wasn't provided, list some plausible reasons for target users to seek out and adopt {product}. You don't need to explain how {product} addresses these reasons yet, that will come next.",

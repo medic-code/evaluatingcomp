@@ -1,4 +1,5 @@
-const {PromptTemplate }= require('langchain/prompts');
+import { PromptTemplate } from 'langchain/prompts.js';
+
 
 const QUESTION_TEMPLATE = `You are an experienced researcher, 
 expert at interpreting and answering questions based on provided sources.

@@ -1,13 +1,8 @@
-const { OpenAI } = require('langchain/llms/openai');
-const prompt  = require('./prompts');
-const { RunnableSequence, RunnablePassthrough } = require('langchain/schema/runnable');
-const { StringOutputParser } = require('langchain/schema/output_parser');
-const createRetriver = require('./ingestion');
-const dotenv = require('dotenv');
-const framework = require('../utils/framework');
-const docAsString = require('../utils/formatDocs');
-
-dotenv.config({ path: `${__dirname}/.env` });
+import { OpenAI } from 'langchain/llms/openai.js';
+import prompt from './prompts.js';
+import { RunnableSequence } from 'langchain/schema/runnable.js';
+import { StringOutputParser } from 'langchain/schema/output_parser.js';
+import docAsString from '../utils/formatDocs.js';
 
 const model = new OpenAI({temperature: 0.9, openAIApiKey:process.env.OPENAI_API_KEY});
 
@@ -22,7 +17,7 @@ async function documentRetrivalChain(vectorStore) {
     return chain;
 }
 
-async function retrivalChain(question,product,vectorStore) {
+async function retrievalChain(question,product,vectorStore) {
     const chain = RunnableSequence.from([
         {
             question: (input) => input.question.replaceAll(' ', '').replaceAll('{product}',input.product),
@@ -40,4 +35,4 @@ async function retrivalChain(question,product,vectorStore) {
 
 
 
-module.exports = { documentRetrivalChain, retrivalChain }
+module.exports = { documentRetrivalChain, retrievalChain }

@@ -4,4 +4,4 @@ async function docAsString(docs) {
     }).join('\n');
 }
 
-module.exports = docAsString;
+export default docAsString;

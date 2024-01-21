@@ -1,4 +1,5 @@
-const { loadWebsite } = require("../llm/ingestion");
+import { loadWebsite } from "../llm/ingestion.js";
+
 
 describe('Testing ingestion data sources', () => {
     test('recursive data', async () => {

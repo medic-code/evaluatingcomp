@@ -45,8 +45,9 @@ Integration tests
 1. function provides a document of url off an array and pageContent.
 */
 
-const axios = require('axios');
-const { PDFLoader } = require('langchain/document_loaders/fs/pdf');
+import axios from 'axios';
+import { PDFLoader } from 'langchain/document_loaders/fs/pdf.js';
+
 
 function pdfValid(url) {
     const urlPattern = new RegExp(

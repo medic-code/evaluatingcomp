@@ -1,10 +1,13 @@
-const dotenv = require('dotenv');
-dotenv.config({ path: `${__dirname}/.env` });
-const {retrivalChain} = require('./llm/chains');
-const { createRetriver } = require('./llm/ingestion');
-const framework = require('./utils/framework');
-const fsp = require('fs').promises;
-const path = require("path");
+import dotenv from 'dotenv';
+import path from 'path'; // Import the 'path' module
+
+dotenv.config({ path: `${path.dirname(import.meta.url)}/../.env` });
+
+import { retrivalChain } from './llm/chains.js';
+import { createRetriver } from './llm/ingestion.js';
+import framework from './utils/framework.js';
+import { promises as fsp } from 'fs';
+
 
 async function generate() {
     const vectorStore = await createRetriver()

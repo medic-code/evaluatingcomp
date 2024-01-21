@@ -1,15 +1,21 @@
 {
   "dependencies": {
+    "@next/bundle-analyzer": "^14.1.0",
     "@supabase/supabase-js": "^2.39.1",
     "axios": "^1.6.5",
     "cheerio": "^1.0.0-rc.12",
     "dotenv": "^16.3.1",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "^14.1.0",
     "html-to-text": "^9.0.5",
     "jsdom": "^23.2.0",
     "langchain": "^0.0.212",
+    "next": "^14.1.0",
     "openai": "^4.24.1",
     "pdf-parse": "^1.1.1",
     "pdfjs-dist": "^4.0.379",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "youtube-transcript": "^1.0.6",
     "youtubei.js": "^5.8.0"
   },
@@ -17,10 +23,15 @@
   "description": "This project takes information from the web and using Open AI's GPT model to take use this information to create a reasoned analysis of a company using a framework that you can choose. It uses the lean canvas as a basis, but goes beyond this.",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start": "cross-env node index.js --experimental-vm-modules",
-    "dev": "cross-env node index.js",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand --watchAll"
+    "build": "next build",
+    "dev2": "next dev",
+    "start2": "next start",
+    "start": "cross-env node ./src/index.js --experimental-vm-modules",
+    "dev": "cross-env node ./src/index.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand --watchAll",
+    "lint": "next lint"
   },
   "keywords": [],
   "author": "",

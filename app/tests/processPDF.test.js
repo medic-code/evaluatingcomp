@@ -1,4 +1,5 @@
-const { pdfValid, getPDF } = require('../utils/processPDF');
+import { pdfValid, getPDF } from '../../utils/processPDF.js';
+
 
 describe('Testing PDF ingestion', () => {
     describe('PDF to doc', () => {
