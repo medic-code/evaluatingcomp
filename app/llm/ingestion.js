@@ -7,7 +7,7 @@ import { getPDF } from '../utils/processPDF.js';
 import { RecursiveUrlLoader } from 'langchain/document_loaders/web/recursive_url';
 import { compile } from 'html-to-text';
 
-async function loadYoutube(url) {
+export async function loadYoutube(url) {
     const loader = YoutubeLoader.createFromUrl(url,{
         language: "en",
         addVideoInfo: true
@@ -16,7 +16,7 @@ async function loadYoutube(url) {
     return docs;
 }
 
-async function loadWebsite(url) {
+export async function loadWebsite(url) {
     const compiledConvert = compile({wordwrap: 130});
 
     const loader = new RecursiveUrlLoader(url, {
@@ -27,7 +27,7 @@ async function loadWebsite(url) {
     return docs;
 }
 
-async function loadData(input) {
+export async function loadData(input) {
     const { query, websites,youtube,pdf} = input;
     console.log(input);
     let allData = []
