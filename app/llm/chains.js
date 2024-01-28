@@ -1,7 +1,7 @@
-import { OpenAI } from 'langchain/llms/openai.js';
+import { OpenAI } from "@langchain/openai";
 import prompt from './prompts.js';
-import { RunnableSequence } from 'langchain/schema/runnable.js';
-import { StringOutputParser } from 'langchain/schema/output_parser.js';
+import { RunnableSequence } from '@langchain/core/runnables';
+import { StringOutputParser } from '@langchain/core/output_parsers';
 import docAsString from '../utils/formatDocs.js';
 
 const model = new OpenAI({temperature: 0.9, openAIApiKey:process.env.OPENAI_API_KEY});
@@ -17,7 +17,7 @@ async function documentRetrivalChain(vectorStore) {
     return chain;
 }
 
-async function retrievalChain(question,product,vectorStore) {
+export async function retrievalChain(question,product,vectorStore) {
     const chain = RunnableSequence.from([
         {
             question: (input) => input.question.replaceAll(' ', '').replaceAll('{product}',input.product),
@@ -33,6 +33,3 @@ async function retrievalChain(question,product,vectorStore) {
     return results;
 }
 
-
-
-module.exports = { documentRetrivalChain, retrievalChain }
