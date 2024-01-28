@@ -1,8 +1,8 @@
-const { createClient } = require('@supabase/supabase-js');
-const { SupabaseVectorStore } = require('langchain/vectorstores/supabase');
-const { OpenAIEmbeddings } = require('langchain/embeddings/openai');
+import { SupabaseVectorStore } from "@langchain/community/vectorstores/supabase";
+import { OpenAIEmbeddings } from "@langchain/openai";
+import { createClient } from "@supabase/supabase-js";
 
-async function createVectorstore(documents) {
+export default async function createVectorstore(documents) {
     const sbApiKey = process.env.SUPABASE_API_KEY;
     const sbUrl =  process.env.SUPABASE_URL_LC_CHATBOT;
     const openAIApiKey = process.env.OPENAI_API_KEY;
@@ -22,5 +22,3 @@ async function createVectorstore(documents) {
         console.error(error)
     }
 }
-
-module.exports = createVectorstore;

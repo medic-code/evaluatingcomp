@@ -1,4 +1,4 @@
-const {PromptTemplate }= require('langchain/prompts');
+import { PromptTemplate } from '@langchain/core/prompts';
 
 const QUESTION_TEMPLATE = `You are an experienced researcher, 
 expert at interpreting and answering questions based on provided sources.
@@ -18,4 +18,4 @@ Now, answer this question using the above context:
 
 const prompt = PromptTemplate.fromTemplate(QUESTION_TEMPLATE);
 
-module.exports = prompt;
+export default prompt;
