@@ -46,7 +46,7 @@ Integration tests
 */
 
 import axios from 'axios';
-import { PDFLoader } from 'langchain/document_loaders/fs/pdf.js';
+import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
 
 
 function pdfValid(url) {
@@ -73,4 +73,4 @@ async function getPDF(url) {
     return docs;
 }
 
-module.exports = { pdfValid, getPDF };
+export { pdfValid, getPDF };
