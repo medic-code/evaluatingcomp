@@ -1,12 +1,11 @@
-import { CheerioWebBaseLoader } from 'langchain/document_loaders/web/cheerio.js';
-import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter.js';
-import { HtmlToTextTransformer } from 'langchain/document_transformers/html_to_text.js';
+import { CheerioWebBaseLoader } from 'langchain/document_loaders/web/cheerio';
+import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
+import { HtmlToTextTransformer } from '@langchain/community/document_transformers/html_to_text';
 import createVectorStore from './vectorstore.js';
-import { YoutubeLoader } from 'langchain/document_loaders/web/youtube.js';
+import { YoutubeLoader } from 'langchain/document_loaders/web/youtube';
 import { getPDF } from '../utils/processPDF.js';
-import { RecursiveUrlLoader } from 'langchain/document_loaders/web/recursive_url.js';
+import { RecursiveUrlLoader } from 'langchain/document_loaders/web/recursive_url';
 import { compile } from 'html-to-text';
-
 
 async function loadYoutube(url) {
     const loader = YoutubeLoader.createFromUrl(url,{
@@ -28,19 +27,30 @@ async function loadWebsite(url) {
     return docs;
 }
 
-async function loadData(urls) {
+async function loadData(input) {
+    const { query, websites,youtube,pdf} = input;
+    console.log(input);
     let allData = []
-    for (let i = 0; i < urls.length; i++ ) {
-        const loader = new CheerioWebBaseLoader(urls[i])
-        const data = await loader.load();
-        allData.push(data);
-        console.log(`Load website data from url${i}`);
+    if (websites[0] !== '') {
+        for (let i = 0; i < websites.length; i++ ) {
+            const loader = new CheerioWebBaseLoader(websites[i])
+            const data = await loader.load();
+            allData.push(data);
+            console.log(`Load website data from url${i}`);
+        }
     }
-    const youtubeDocs = await loadYoutube('https://www.youtube.com/watch?v=ecaM2e3Rfzw');
-    const pdfDocs = await getPDF('https://arxiv.org/pdf/2301.08801.pdf')
-    const websiteDocs = await loadWebsite('https://www.curaihealth.com/about')
-    allData.push(youtubeDocs,pdfDocs, websiteDocs);
-    console.log(allData.flat());
+
+    if (youtube[0] !== '') {
+        const youtubeDocs = await loadYoutube(youtube[0]);
+        allData.push(youtubeDocs);
+    }
+    if(pdf[0] !== '') {
+        const pdfDocs = await getPDF(pdf[0]);
+        allData.push(pdfDocs);
+    }
+
+    const websiteDocs = await loadWebsite(query)
+    allData.push(websiteDocs);
     return allData.flat();
 }
 
@@ -53,9 +63,9 @@ async function chunkData(data) {
     return newDocuments;
 }
 
-async function createRetriever() {
+export async function createRetriever(input) {
     try {
-        const data = await loadData(['https://research.contrary.com/reports/lattice','https://research.contrary.com/reports/solv']);
+        const data = await loadData(input);
         if (!data) {
             console.error("No data returned from loadData");
             return null;
@@ -79,5 +89,3 @@ async function createRetriever() {
         return null;
     }
 }
-
-module.exports = { createRetriever, loadWebsite }; 
