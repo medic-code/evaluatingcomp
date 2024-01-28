@@ -1,0 +1,64 @@
+
+:root {
+    --ff-primary: inter;
+    --ff-body: var(--ff-primary);
+    --ff-heading: var(--ff-primary);
+
+    --fw-regular: 400;
+    --fw-semi-bold: 500;
+    --fw-bold: 700;
+
+    --fs-300: 0.8125rem;
+    --fs-400: 0.875rem;
+    --fs-500: 1rem;
+    --fs-600: 1.875rem;
+    --fs-700: 2.5rem;
+
+    --fs-body: var(--fs-400);
+    --fs-nav: var(--fs-500);
+    --fs-button: var(--fs-300);
+
+    --s16: 16px;
+    --s24: 24px;
+    --s32: 32px;
+    --s8: 8px;
+    --s4: 4px;
+}
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+/*  Default margin removes */
+* {
+    margin: 0;
+    padding: 0;
+    font: inherit;
+}
+
+h2 {
+    font-size: var(--fs-600);
+    font-weight: var(--fw-bold);
+}
+
+img,svg{
+    max-width: 100%;
+    display: block;
+}
+
+body {
+    text-rendering: optimizeSpeed;
+    line-height: 2.3;
+    font-family: var(--ff-primary);
+    font-size: var(--fs-500);
+}
+
+.container {
+    --max-width: 1400px;
+    --padding: 1rem;
+
+    width: min(var(--max-width), 100% - (var(--padding) * 2));
+    margin-inline: auto;
+}
