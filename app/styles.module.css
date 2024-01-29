@@ -45,6 +45,7 @@
 .report {
     margin-left: var(--s32);
     margin-top: 2em;
+    white-space: pre-line;
 }
 
 .form {
