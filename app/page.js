@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import styles from './styles.module.css';
 import { useForm } from 'react-hook-form';
+import generatePDF from './utils/generatePDF';
 
 
 
@@ -48,6 +49,7 @@ function HomePage() {
     }
 
     const onSubmit = async (data,e) => {
+        setComplete(false);
         console.log(e);
         e.preventDefault();
         
@@ -85,6 +87,10 @@ function HomePage() {
         ${styles.form} 
         ${isLoading ? styles.form__loading : ''}
     `;
+
+    const handlePDF = () => {
+        generatePDF(report);
+    }
 
     return (
         <>
@@ -166,6 +172,7 @@ function HomePage() {
             {isComplete && !isLoading && <div className={styles.container2}>
                 { Object.entries(report).map(section => (<div className={styles.report}><h2>{formatTitles(section[0])}</h2>{section[1]}</div>))}
             </div>}
+            {isComplete && <a onClick={handlePDF}>Download PDF</a>}
         </div>
         </>
         );

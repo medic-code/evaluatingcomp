@@ -38,6 +38,8 @@
     min-width: 250px;
     max-width: 60%;
     margin-bottom: 5em;
+    overflow-y: scroll;
+    height: 70vh;
 }
 
 .report {
@@ -51,6 +53,9 @@
     flex: 1;
     min-width: 250px;
     max-width: 40%;
+    position:sticky;
+    top: 0;
+    z-index: 1;
 }
 
 .form__label {
