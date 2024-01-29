@@ -14,7 +14,9 @@ export default function generatePDF(data) {
     const margin = 20;
     
     const doc = new jsPDF();
-
+    let img = new Image();
+    img.src = 'logo.png';
+  
     doc.addFileToVFS('inter-reg.ttf',regfont);
     doc.addFileToVFS('inter-bold.ttf',boldfont);
     doc.addFont('inter-reg.ttf','inter-reg','normal');
@@ -25,9 +27,16 @@ export default function generatePDF(data) {
     const titles = Object.keys(data).map(title => formatTitles(title));
 
     let height = margin;
+    doc.addImage(img, 'png', 15,10);
+    height += margin*1.2;
     paragraphs.forEach((paragraph,index) => {
         doc.setFont('inter-bold')
         doc.setFontSize(20);
+
+        if (height > maxLineHeight - 2*margin) {
+            doc.addPage()
+            height = margin;
+        }
      
         if (titles[index] === 'summary') {
             doc.text(titles[index],margin,height)

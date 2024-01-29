@@ -170,7 +170,7 @@ function HomePage() {
             </form>
             {isLoading ? <Loading><div className={styles.loading}></div></Loading> : null }
             {isComplete && !isLoading && <div className={styles.container2}>
-                { Object.entries(report).map(section => (<div className={styles.report}><h2>{formatTitles(section[0])}</h2>{section[1]}</div>))}
+                { Object.entries(report).map(section => (<div className={styles.report} ><h2>{formatTitles(section[0])}</h2>{section[1]}</div>))}
             </div>}
             {isComplete && <a onClick={handlePDF}>Download PDF</a>}
         </div>
