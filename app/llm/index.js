@@ -10,7 +10,7 @@ export default async function generate(details) {
     const report = {}
     for (let i = 0; i < frameworks.length; i++) {
         let results = await retrievalChain(frameworks[i][1], name,vectorStore);
-        report[frameworks[i][0]] = results.replace(/^\?\s\s/,'').replace(/^\s\s/,'');
+        report[frameworks[i][0]] = results.replace(/^\?\s\s/,'').replace(/^\s+/,'');
         console.log(results.includes('\n'));
         console.log('Creating',frameworks[i][0]);
     }

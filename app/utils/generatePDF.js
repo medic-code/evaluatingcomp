@@ -9,7 +9,7 @@ const formatTitles = (title) => {
         .join(' ');
 }
 
-export default function generatePDF(data) {
+export default function generatePDF(data,name) {
     const lineHeight = 6;
     const margin = 20;
     
@@ -28,10 +28,13 @@ export default function generatePDF(data) {
 
     let height = margin;
     doc.addImage(img, 'png', 15,10);
-    height += margin*1.2;
+    height += margin*1.5;
+    doc.setFontSize(24);
+    doc.text(formatTitles(name) + ' - Company Profile',40,height)
+    height += lineHeight*3;
     paragraphs.forEach((paragraph,index) => {
-        doc.setFont('inter-bold')
-        doc.setFontSize(20);
+        
+        doc.setFontSize(16);
 
         if (height > maxLineHeight - 2*margin) {
             doc.addPage()
@@ -46,7 +49,7 @@ export default function generatePDF(data) {
             height += lineHeight*2;
         }
         
-        doc.setFont('inter-reg')
+        doc.setFont('inter-reg', 'normal')
         doc.setFontSize(10.5);
 
         const lines = doc.splitTextToSize(paragraph, doc.internal.pageSize.width - 2*margin);

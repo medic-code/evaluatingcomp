@@ -89,7 +89,7 @@ function HomePage() {
     `;
 
     const handlePDF = () => {
-        generatePDF(report);
+        generatePDF(report,name);
     }
 
     return (
