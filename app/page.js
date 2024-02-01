@@ -4,6 +4,7 @@ import { useState } from 'react';
 import styles from './styles.module.css';
 import { useForm } from 'react-hook-form';
 import generatePDF from './utils/generatePDF';
+import Error from './components/error';
 
 
 
@@ -18,9 +19,7 @@ const formatTitles = (title) => {
 const Loading = ({children}) => {
     return <div className={styles.loaderComp}>{children}</div>;
 }
-const Error = (name = '') => {
-    return <div className={styles.error}>{name}</div>
-}
+
 function HomePage() {
     const [query,setQuery] = useState('')
     const [websites, setWebsites] = useState('');
@@ -30,6 +29,7 @@ function HomePage() {
     const [name, setName] = useState('');
     const [isLoading, setLoading] = useState(false)
     const [isComplete, setComplete] = useState(false);
+    const [error, setError] = useState(null);
 
     const { register, handleSubmit,formState:{errors} } = useForm();
 
@@ -52,6 +52,7 @@ function HomePage() {
         setComplete(false);
         console.log(e);
         e.preventDefault();
+        setError(null);
         
         const body = {
                 name,
@@ -69,15 +70,21 @@ function HomePage() {
                     },
                     body: JSON.stringify(body)
                 });
+
+                if(!response.ok) {
+                    throw new Error(`HTTP error status: ${response.status}`)
+                }
                
               const data = await response.json();
-              setLoading(false);
-              console.log(data);
+      
               setReport(data);
               setComplete(true);
                 
             } catch(error) {
-                console.error(error);
+                console.error('Failed to submit',error);
+                setError('Failed to Submit, Please try again later')
+            } finally {
+                setLoading(false);
             }
         
         
@@ -168,6 +175,7 @@ function HomePage() {
                     </div>
                     <button className={styles.form__button} type="submit">Create</button>
             </form>
+            {error && <Error message={error} />}
             {isLoading ? <Loading><div className={styles.loading}></div></Loading> : null }
             {isComplete && !isLoading && <div className={styles.container2}>
                 { Object.entries(report).map(section => (<div className={styles.report} ><h2>{formatTitles(section[0])}</h2>{section[1]}</div>))}
