@@ -87,10 +87,6 @@ function HomePage() {
         ${isLoading ? styles.form__loading : ''}
     `;
 
-    const handlePDF = () => {
-        generatePDF(report,name);
-    }
-
     return (
         <>
             <header className={styles.header}>
@@ -170,7 +166,7 @@ function HomePage() {
             {error && <Error message={error} />}
             {isLoading ? <Loading><div className={styles.loading}></div></Loading> : null }
             {isComplete && !isLoading && <Report report={report}/>}
-            {isComplete && <a onClick={handlePDF}>Download PDF</a>}
+            {isComplete && <a onClick={() =>  generatePDF(report,name)}>Download PDF</a>}
         </div>
         </>
         );
