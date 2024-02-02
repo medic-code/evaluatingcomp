@@ -5,16 +5,8 @@ import styles from './styles.module.css';
 import { useForm } from 'react-hook-form';
 import generatePDF from './utils/generatePDF';
 import Error from './components/error';
+import Report from './components/report';
 
-
-
-const formatTitles = (title) => {
-    return title
-        .replaceAll('_',' ')
-        .split(' ')
-        .map(word => word[0].toUpperCase() + word.slice(1))
-        .join(' ')
-}
 
 const Loading = ({children}) => {
     return <div className={styles.loaderComp}>{children}</div>;
@@ -177,9 +169,7 @@ function HomePage() {
             </form>
             {error && <Error message={error} />}
             {isLoading ? <Loading><div className={styles.loading}></div></Loading> : null }
-            {isComplete && !isLoading && <div className={styles.container2}>
-                { Object.entries(report).map(section => (<div className={styles.report} ><h2>{formatTitles(section[0])}</h2>{section[1]}</div>))}
-            </div>}
+            {isComplete && !isLoading && <Report report={report}/>}
             {isComplete && <a onClick={handlePDF}>Download PDF</a>}
         </div>
         </>
