@@ -15,7 +15,7 @@ export default async function Home() {
 
     return (
         <div>
-            <HomePage/>
+            <HomePage user={user}/>
             <SignOut/>
         </div>
     )

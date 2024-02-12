@@ -11,7 +11,8 @@ const Loading = ({children}) => {
     return <div className={styles.loaderComp}>{children}</div>;
 }
 
-function HomePage() {
+function HomePage({user}) {
+    console.log(user);
     const [query,setQuery] = useState('')
     const [websites, setWebsites] = useState('');
     const [youtube,setYoutube] = useState('')
@@ -94,7 +95,7 @@ function HomePage() {
                 <a className={styles.settings} onClick={() => setModal(prev => !prev)}>Settings</a>
             </header>
         <div className={isLoading ? styles.whileLoading : styles.notLoading}>
-            <Modal showModal={setModal} modal={modal} />
+            <Modal setModal={setModal} modal={modal} user={user.email} />
                 <form className={loadingClass} onSubmit={handleSubmit(onSubmit)}>
                     <div>
                         <label className={styles.form__label} htmlFor="name">Company Name*</label>
