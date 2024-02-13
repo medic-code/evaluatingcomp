@@ -1,6 +1,7 @@
 'use client';
 
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import styles from '../styles.module.css';
 
 export default function SignOut() {
     const supabase = createClientComponentClient();
@@ -13,8 +14,8 @@ export default function SignOut() {
         }
     }
     return (
-        <button type="button" onClick={handleSignOut}>
+        <a className={styles.signout} type="button" onClick={handleSignOut}>
             Sign Out
-        </button>
+        </a>
     )
 }
