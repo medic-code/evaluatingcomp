@@ -12,7 +12,6 @@ const Loading = ({children}) => {
 }
 
 function HomePage({user}) {
-    console.log(user);
     const [query,setQuery] = useState('')
     const [websites, setWebsites] = useState('');
     const [youtube,setYoutube] = useState('')
