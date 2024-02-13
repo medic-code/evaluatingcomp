@@ -16,7 +16,7 @@
 }
 
 .settings {
-    margin-left: auto;
+    margin-left: 1em;
 }
 
 .whileLoading {
@@ -45,6 +45,7 @@
     flex:1;
     min-width: 250px;
     max-width: 60%;
+    padding: 1em;
     margin-bottom: 5em;
     overflow-y: scroll;
     height: 70vh;
@@ -123,7 +124,7 @@
     border: 1px solid rgba(0, 97, 63, 0.2);
     color: rgb(255, 255, 255);
     border-radius: 0.5em;
-    width: 25%;
+    width: 100%;
     text-align: center;
     background-color: rgb(0, 158, 103);
 }
@@ -233,9 +234,35 @@
     padding: 3em;
 }
 
+.container__reset {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3em;
+}
+
+
 .link {
    margin-top: 2em;
    margin-bottom: 2em;
+}
+
+.title {
+    margin-bottom: 1em;
+}
+
+.signoutcontainer {
+    margin-left: auto;
+ 
+}
+
+.signout {
+    margin-left: 1em;
+    margin-right: var(--s16);
+}
+
+.signoutcontainer:hover {
+    cursor: pointer;
 }
 
 @keyframes spin {
