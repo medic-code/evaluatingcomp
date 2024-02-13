@@ -10,7 +10,6 @@ const Modal = ({modal, setModal,user}) => {
             const supabase = createClientComponentClient();
             const apikey = await supabase.rpc('read_secret', {secret_name: `${user}`});
             if (apikey.data) {
-                console.log(apikey, 'data');
                 setKey(apikey.data);
                 const hiddenInput = document.getElementById('api')
                 if(hiddenInput) {
@@ -72,7 +71,6 @@ const Modal = ({modal, setModal,user}) => {
         } else {
             const supabase = createClientComponentClient();
             const apikey = await supabase.rpc('read_secretid', {secret_name: `${user}`});
-            console.log(apikey, 'readsecretid')
             const { error } = await supabase.rpc('update_secret', {secretid: apikey.data, secret: `${key}`})
             if (error) {
                 console.error('error inserting data',error)

@@ -31,19 +31,15 @@ function HomePage({user}) {
     }
 
     const handleTextArea = (e) => {
-        console.log(e.target.value)
         setWebsites(e.target.value);
-        console.log();
     }
 
     const handleYoutubeArea = (e) => {
-        console.log(e.target.value)
         setYoutube(e.target.value);
     }
 
     const onSubmit = async (data,e) => {
         setComplete(false);
-        console.log(e);
         e.preventDefault();
         setError(null);
         
@@ -52,7 +48,8 @@ function HomePage({user}) {
                 query,
                 websites: websites.split('\n'),
                 youtube: youtube.split('\n'),
-                pdf: pdf.split('\n')
+                pdf: pdf.split('\n'),
+                user: user.email
             }
             try {
                 setLoading(true);
