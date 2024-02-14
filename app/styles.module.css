@@ -72,6 +72,7 @@
     display: block;
     color: rgb(39, 42, 41);
     font-size: 14px;
+    font-weight: 500;
 }
 
 .form__text {
@@ -81,6 +82,7 @@
     padding: 0.5em 1em 0.5em 1em;
     border-bottom: 2px solid rgb(229, 231, 235);
     margin-bottom: 1.5em;
+    background-color: rgb(249, 250, 251);
 }
 
 .form__textarea {
@@ -90,7 +92,8 @@
     width: 100%;
     padding: 0.5em 1em 0em 1em;
     border: 2px solid rgb(229, 231, 235);
-    border-radius: 0.5em
+    border-radius: 0.5em;
+    background-color: rgb(249, 250, 251);
 }
 
 .form__text::placeholder {
@@ -163,8 +166,8 @@
 }
 
 .modalContainer {
-    width: 500px;
-    height: 300px;
+    width: 600px;
+    height: 350px;
     background-color: white;
     position: relative;
     border-radius: 12px;
@@ -227,6 +230,20 @@
     margin-left: auto;
 }
 
+.modal__text {
+    all: unset;
+    display: block;
+    width: 90%;
+    padding: 0.5em 1em 0.5em 1em;
+    border-bottom: 2px solid rgb(229, 231, 235);
+    margin-bottom: 1.5em;
+    background-color: rgb(249, 250, 251);
+}
+
+.modal__text:active,.modal__text:focus{
+    border-color: rgba(0, 158, 103,0.6);
+}
+
 .container__signin {
     display: flex;
     flex-direction: column;
@@ -263,6 +280,14 @@
 
 .signoutcontainer:hover {
     cursor: pointer;
+}
+
+.apikey {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    
 }
 
 @keyframes spin {
