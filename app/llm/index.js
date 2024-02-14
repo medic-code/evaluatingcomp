@@ -3,13 +3,12 @@ import { createRetriever } from './ingestion.js';
 import framework from '../utils/framework.js';
 
 export default async function generate(details) {
-    const {name,query,websites,youtube,pdf} = details;
-    console.log(details);
+    const {name,query,websites,youtube,pdf,user} = details;
     const vectorStore = await createRetriever({query,websites,youtube,pdf})
     const frameworks = Object.entries(framework);
     const report = {}
     for (let i = 0; i < frameworks.length; i++) {
-        let results = await retrievalChain(frameworks[i][1], name,vectorStore);
+        let results = await retrievalChain(frameworks[i][1], name,vectorStore,user);
         report[frameworks[i][0]] = results.replace(/^\?\s\s/,'').replace(/^\s+/,'');
         console.log(results.includes('\n'));
         console.log('Creating',frameworks[i][0]);
