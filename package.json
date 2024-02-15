@@ -30,8 +30,7 @@
   "scripts": {
     "build": "next build",
     "dev2": "next dev",
-    "start2": "next start",
-    "start": "cross-env node ./src/index.js --experimental-vm-modules",
+    "start": "next start",
     "dev": "cross-env node ./src/index.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand --watchAll",
     "lint": "next lint"
