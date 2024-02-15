@@ -3,7 +3,7 @@
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import styles from '../styles.module.css';
 
-export default function SignOut() {
+export default function signout() {
     const supabase = createClientComponentClient();
 
     async function handleSignOut() {
