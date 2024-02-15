@@ -6,7 +6,7 @@ import generatePDF from '../utils/generatePDF';
 import Error from '../components/error';
 import Report from '../components/report';
 import Modal from '../components/modal';
-import SignOut from './SignOut';
+import SignOut from './signout';
 
 const Loading = ({children}) => {
     return <div className={styles.loaderComp}>{children}</div>;
