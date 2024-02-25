@@ -135,7 +135,7 @@ function HomePage({user}) {
                         onChange={(e) => setQuery(e.target.value)}
                     />
                     </div>
-                    <label className={styles.form__label} htmlFor="websites">Websites (pdf/YouTube URLsg allowed)</label>
+                    <label className={styles.form__label} htmlFor="websites">Websites (pdf/YouTube URLs allowed)</label>
                     <div>
                         <textarea 
                             placeholder="Add website links"
