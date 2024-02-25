@@ -159,7 +159,7 @@ function HomePage({user}) {
                             webkitdirectory="true"
                             onChange={handleFolder}
                         />
-                      <label htmlFor="file" className={styles.customfilelabel}>Choose files</label>
+                      <label htmlFor="file" className={styles.customfilelabel}>Choose folder</label>
                      <span>{uploads.length} files selected</span>
                       </div>
                       <span>{uploads.map((file,index) => (
