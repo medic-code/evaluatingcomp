@@ -15,8 +15,6 @@ const Loading = ({children}) => {
 function HomePage({user}) {
     const [query,setQuery] = useState('')
     const [websites, setWebsites] = useState('');
-    const [youtube,setYoutube] = useState('')
-    const [pdf, setPDF] = useState('');
     const [folder,setFolder] = useState('');
     const [report,setReport] = useState('');
     const [name, setName] = useState('');
@@ -28,16 +26,8 @@ function HomePage({user}) {
 
     const { register, handleSubmit,formState:{errors} } = useForm();
 
-    const handlePDFArea = (e) => {
-        setPDF(e.target.value)
-    }
-
     const handleTextArea = (e) => {
         setWebsites(e.target.value);
-    }
-
-    const handleYoutubeArea = (e) => {
-        setYoutube(e.target.value);
     }
 
     const handleFolder = (e) => {
@@ -60,8 +50,6 @@ function HomePage({user}) {
                 name,
                 query,
                 websites: websites.split('\n'),
-                youtube: youtube.split('\n'),
-                pdf: pdf.split('\n'),
                 user: user.email,
                 folder
             }
@@ -147,7 +135,7 @@ function HomePage({user}) {
                         onChange={(e) => setQuery(e.target.value)}
                     />
                     </div>
-                    <label className={styles.form__label} htmlFor="websites">Website Links</label>
+                    <label className={styles.form__label} htmlFor="websites">Websites (pdf/YouTube URLs allowed)</label>
                     <div>
                         <textarea 
                             placeholder="Add website links"
@@ -157,29 +145,7 @@ function HomePage({user}) {
                             value={websites}
                             onChange={handleTextArea}/>
                     </div>
-                    <label className={styles.form__label} htmlFor="youtube">Youtube Links</label>
-                    <div>
-                        <textarea 
-                            placeholder="Add youtube links" 
-                            className={styles.form__textarea} 
-                            type="text" 
-                            id="youtube" 
-                            name="youtube"  
-                            value={youtube}
-                            onChange={handleYoutubeArea}/>
-                    </div>
-                    <label className={styles.form__label} htmlFor="pdf">PDF Links</label>
-                    <div>
-                        <textarea
-                            placeholder="Add pdf links"
-                            className={styles.form__textarea}
-                            type="text"
-                            id="pdf"
-                            name="pdf"
-                            value={pdf}
-                            onChange={handlePDFArea}
-                        />
-                    </div>
+            
                     <div>
                     <label className={styles.form__label} htmlFor="pdf">Upload files (.pdf .docx .txt)</label>
                        <div className={styles.upload}>

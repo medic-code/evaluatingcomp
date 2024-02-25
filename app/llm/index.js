@@ -3,8 +3,8 @@ import { createRetriever } from './ingestion.js';
 import framework from '../utils/framework.js';
 
 export default async function generate(details) {
-    const {name,query,websites,youtube,pdf,user,folder} = details;
-    const vectorStore = await createRetriever({query,websites,youtube,pdf,folder})
+    const {name,query,websites,user,folder} = details;
+    const vectorStore = await createRetriever({query,websites,folder})
     const frameworks = Object.entries(framework);
     const report = {}
     for (let i = 0; i < frameworks.length; i++) {

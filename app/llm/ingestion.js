@@ -32,19 +32,28 @@ export async function loadWebsite(url) {
 }
 
 export async function loadData(input) {
-    const { query, websites,youtube,pdf,folder} = input;
+    const { query, websites,folder} = input;
     console.log(folder, 'folder');
     let allData = []
     if (websites[0] !== '') {
         for (let i = 0; i < websites.length; i++ ) {
-            const loader = new CheerioWebBaseLoader(websites[i])
-            const data = await loader.load();
-            allData.push(data);
+            if(websites[i].includes('youtube')) {
+                const youtubeDocs = await loadYoutube(websites[i]);
+                allData.push(youtubeDocs);
+            } else if(websites[i].includes('.pdf')) {
+                const pdfDocs = await getPDF(websites[i]);
+                allData.push(pdfDocs);
+            } else {
+                const loader = new CheerioWebBaseLoader(websites[i])
+                const data = await loader.load();
+                allData.push(data);
+            }
+       
             console.log(`Load website data from url${i}`);
         }
     }
 
-    if (folder[0] !== "") {
+    if (folder) {
             let absolutePath = process.cwd() + folder;
             const loader = new DirectoryLoader(absolutePath, {
                 ".txt": (path) => new TextLoader(path),
@@ -55,15 +64,6 @@ export async function loadData(input) {
             allData.push(docs)
             console.log(`Loaded upload files`);
         
-    }
-
-    if (youtube[0] !== '') {
-        const youtubeDocs = await loadYoutube(youtube[0]);
-        allData.push(youtubeDocs);
-    }
-    if(pdf[0] !== '') {
-        const pdfDocs = await getPDF(pdf[0]);
-        allData.push(pdfDocs);
     }
 
     const websiteDocs = await loadWebsite(query)
