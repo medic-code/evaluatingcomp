@@ -290,6 +290,40 @@
     
 }
 
+.customfileinput {
+    opacity: 0;
+    position: absolute;
+    z-index: 1;
+    width: 110px;
+    height: 60px;
+}
+
+.customfilelabel {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #008CBA;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.customfilelabel:hover {
+    background-color: #007B9E;
+}
+
+.uploadlist {
+    list-style: none;
+    font-size: 14px;
+    color: #8f96a3
+}
+
+.upload {
+    display: flex;
+    width: 100%;
+    align-items: baseline;
+    gap: 10px; 
+}
+
 @keyframes spin {
     0% { transform: rotate(0deg);}
     100% { transform: rotate(360deg);}
