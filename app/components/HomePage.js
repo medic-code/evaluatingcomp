@@ -17,12 +17,14 @@ function HomePage({user}) {
     const [websites, setWebsites] = useState('');
     const [youtube,setYoutube] = useState('')
     const [pdf, setPDF] = useState('');
+    const [folder,setFolder] = useState('');
     const [report,setReport] = useState('');
     const [name, setName] = useState('');
     const [isLoading, setLoading] = useState(false)
     const [isComplete, setComplete] = useState(false);
     const [error, setError] = useState(null);
     const [modal, setModal] = useState(false);
+    const [uploads, setUploads] = useState([]);
 
     const { register, handleSubmit,formState:{errors} } = useForm();
 
@@ -38,6 +40,17 @@ function HomePage({user}) {
         setYoutube(e.target.value);
     }
 
+    const handleFolder = (e) => {
+        if (e.target.files.length > 0) {
+            let files = e.target.files;
+            setUploads(Array.from(e.target.files))
+            let firstRelativePath = files[0].webkitRelativePath;
+            const folderName = '/' + firstRelativePath.split('/')[0];
+            setFolder(folderName); 
+        }
+       
+    }
+
     const onSubmit = async (data,e) => {
         setComplete(false);
         e.preventDefault();
@@ -49,8 +62,10 @@ function HomePage({user}) {
                 websites: websites.split('\n'),
                 youtube: youtube.split('\n'),
                 pdf: pdf.split('\n'),
-                user: user.email
+                user: user.email,
+                folder
             }
+
             try {
                 setLoading(true);
                 const response = await fetch('/api/retrieval', {
@@ -164,6 +179,26 @@ function HomePage({user}) {
                             value={pdf}
                             onChange={handlePDFArea}
                         />
+                    </div>
+                    <div>
+                    <label className={styles.form__label} htmlFor="pdf">Upload files (.pdf .docx .txt)</label>
+                       <div className={styles.upload}>
+                        <input 
+                            className={styles.customfileinput}
+                            type="file"
+                            id="folder"
+                            name="folder"
+                            multiple
+                            directory="true"
+                            webkitdirectory="true"
+                            onChange={handleFolder}
+                        />
+                      <label htmlFor="file" className={styles.customfilelabel}>Choose files</label>
+                     <span>{uploads.length} files selected</span>
+                      </div>
+                      <span>{uploads.map((file,index) => (
+                        <li key={index} className={styles.uploadlist}>{file.name}</li>
+                      ))}</span>
                     </div>
                     <button className={styles.form__button} type="submit">Create</button>
             </form>

@@ -6,6 +6,10 @@ import { YoutubeLoader } from 'langchain/document_loaders/web/youtube';
 import { getPDF } from '../utils/processPDF.js';
 import { RecursiveUrlLoader } from 'langchain/document_loaders/web/recursive_url';
 import { compile } from 'html-to-text';
+import { DirectoryLoader } from 'langchain/document_loaders/fs/directory';
+import { TextLoader } from "langchain/document_loaders/fs/text";
+import { PDFLoader } from "langchain/document_loaders/fs/pdf";
+import { DocxLoader } from "langchain/document_loaders/fs/docx";
 
 export async function loadYoutube(url) {
     const loader = YoutubeLoader.createFromUrl(url,{
@@ -28,8 +32,8 @@ export async function loadWebsite(url) {
 }
 
 export async function loadData(input) {
-    const { query, websites,youtube,pdf} = input;
-    console.log(input);
+    const { query, websites,youtube,pdf,folder} = input;
+    console.log(folder, 'folder');
     let allData = []
     if (websites[0] !== '') {
         for (let i = 0; i < websites.length; i++ ) {
@@ -38,6 +42,19 @@ export async function loadData(input) {
             allData.push(data);
             console.log(`Load website data from url${i}`);
         }
+    }
+
+    if (folder[0] !== "") {
+            let absolutePath = process.cwd() + folder;
+            const loader = new DirectoryLoader(absolutePath, {
+                ".txt": (path) => new TextLoader(path),
+                ".pdf": (path) => new PDFLoader(path),
+                ".docx": (path) => new DocxLoader(path)
+            })
+            const docs = await loader.load();
+            allData.push(docs)
+            console.log(`Loaded upload files`);
+        
     }
 
     if (youtube[0] !== '') {
