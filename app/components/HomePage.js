@@ -135,7 +135,7 @@ function HomePage({user}) {
                         onChange={(e) => setQuery(e.target.value)}
                     />
                     </div>
-                    <label className={styles.form__label} htmlFor="websites">Websites (pdf/YouTube URLs allowed)</label>
+                    <label className={styles.form__label} htmlFor="websites">Websites (pdf/YouTube URLsg allowed)</label>
                     <div>
                         <textarea 
                             placeholder="Add website links"
@@ -147,7 +147,7 @@ function HomePage({user}) {
                     </div>
             
                     <div>
-                    <label className={styles.form__label} htmlFor="pdf">Upload files (.pdf .docx .txt)</label>
+                    <label className={styles.form__label} htmlFor="pdf">Upload files (.pdf .docx .txt .mp3)</label>
                        <div className={styles.upload}>
                         <input 
                             className={styles.customfileinput}
