@@ -10,6 +10,7 @@ import { DirectoryLoader } from 'langchain/document_loaders/fs/directory';
 import { TextLoader } from "langchain/document_loaders/fs/text";
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import { DocxLoader } from "langchain/document_loaders/fs/docx";
+import { OpenAIWhisperAudio } from "langchain/document_loaders/fs/openai_whisper_audio";
 
 export async function loadYoutube(url) {
     const loader = YoutubeLoader.createFromUrl(url,{
@@ -58,7 +59,8 @@ export async function loadData(input) {
             const loader = new DirectoryLoader(absolutePath, {
                 ".txt": (path) => new TextLoader(path),
                 ".pdf": (path) => new PDFLoader(path),
-                ".docx": (path) => new DocxLoader(path)
+                ".docx": (path) => new DocxLoader(path),
+                ".mp3": (path) => new OpenAIWhisperAudio(path)
             })
             const docs = await loader.load();
             allData.push(docs)
