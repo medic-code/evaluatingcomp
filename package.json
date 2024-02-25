@@ -12,7 +12,9 @@
     "jsdom": "^23.2.0",
     "jspdf": "^2.5.1",
     "langchain": "^0.0.212",
+    "mammoth": "^1.7.0",
     "next": "^14.1.0",
+    "officeparser": "^4.0.8",
     "openai": "^4.24.1",
     "pdf-parse": "^1.1.1",
     "pdfjs-dist": "^4.0.379",
@@ -29,7 +31,7 @@
   "type": "module",
   "scripts": {
     "build": "next build",
-    "dev2": "next dev",
+    "dev2": "NODE_OPTIONS='--inspect' next dev",
     "start": "next start",
     "dev": "cross-env node ./src/index.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand --watchAll",
